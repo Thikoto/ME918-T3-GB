@@ -87,5 +87,7 @@ http://servidor:XXXX/significancia
 http://servidor:XXXX/predicao_unica?new_x=3&new_grupo=C
 
 - *predicao_multipla*: A predição de múltiplos valores deve ser feito a partir do corpo da requisição em formato JSON. Podemos predizer os valores de *y* para as seguintes variáveis preditoras *x*: [1.2, 2.3, 3.4], *grupo*: ["C", "B", "A"] em uma ferramenta de envio de requisições a partir das entradas:
+
 $json = '{"x": [1.2, 2.3, 3.4], "grupo": ["C", "B", "A"]}'
+
 Invoke-RestMethod -Uri "http://servidor:XXXX/predicao_multipla" -Method Post -Body $json -ContentType "application/json"
