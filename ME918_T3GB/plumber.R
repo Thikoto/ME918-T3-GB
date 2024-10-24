@@ -150,9 +150,17 @@ function(observacao, x, grupo, y) {
 #* @serializer png
 #* @get /grafico
 function() {
-  grafico <- ggplot(dados_regressao, aes(x = x, y = y, color = grupo)) +
+  grafico <- ggplot(dados_regressao,
+                    aes(x = x,
+                        y = y,
+                        color = grupo)) +
     geom_point() +
-    geom_smooth(method = "lm", se = FALSE)
+    geom_smooth(method = "lm",
+                se = FALSE) +
+    labs(title = "Gráfico dos dados com reta de regressão (desconsiderando o grupo)",
+         x = "Variável preditora (x)",
+         y = "Variável resposta (y)") +
+    theme_classic()
   print(grafico)
 }
 
@@ -245,5 +253,15 @@ function(new_x, new_grupo) {
 function(req) {
   reg <- lm(y ~ x + grupo, data = dados_regressao)
   new_data <- req$body
+  valores_permitidos <- c("A", "B", "C")
+  if (!all(new_data$grupo %in% valores_permitidos)) {
+    stop("Variável categórica 'grupo' precisa ser A, B ou C")
+  }
+  
+  new_data$x <- as.numeric(new_data$x)
+  if (anyNA(new_data$x)) {
+    stop("Variável numérica 'x' inválida")
+  }
+  
   data.frame(novo_x = new_data$x, novo_grupo = new_data$grupo, y_predito = predict(reg, new_data))
 }
