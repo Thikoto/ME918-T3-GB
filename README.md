@@ -131,8 +131,10 @@ valor de *XXXX* será a porta em que o serviço está sendo processado.
   partir do corpo da requisição em formato JSON. Podemos predizer os
   valores de *y* para as seguintes variáveis preditoras *x*: \[1.2, 2.3,
   3.4\], *grupo*: \[“C”, “B”, “A”\] em uma ferramenta de envio de
-  requisições a partir das entradas: \$json = ‘{“x”: \[1.2, 2.3, 3.4\],
-  “grupo”: \[“C”, “B”, “A”\]}’ Invoke-RestMethod -Uri
-  “<a href="http://servidor:XXXX/predicao_multipla"
-  class="uri">http://servidor:XXXX/predicao_multipla</a>” -Method Post
-  -Body \$json -ContentType “application/json”
+  requisições a partir das entradas:
+
+\$json = ‘{“x”: \[1.2, 2.3, 3.4\], “grupo”: \[“C”, “B”, “A”\]}’
+
+Invoke-RestMethod -Uri “<a href="http://servidor:XXXX/predicao_multipla"
+class="uri">http://servidor:XXXX/predicao_multipla</a>” -Method Post
+-Body \$json -ContentType “application/json”
